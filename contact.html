@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &mdash; SMC Batticaloa Alumni Association UK</title>
+  <meta name="description" content="Get in touch with the St. Michael's College Batticaloa Alumni Association UK branch." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="St. Michael's College Alumni Association UK home">
+        <img src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
+        <span class="brand-text">
+          <strong>St. Michael&rsquo;s College</strong>
+          <span>Batticaloa &middot; Alumni &middot; UK</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="committee.html">Committee</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow reveal">Say hello</p>
+      <h1 class="reveal d1">Get in touch</h1>
+      <p class="reveal d2">Whether you&rsquo;d like to join the branch, ask a question, or help with an upcoming event &mdash; drop us a line and we&rsquo;ll get back to you.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <!--
+          ===========================================================
+          CONNECT THE FORM BEFORE GOING LIVE (see README):
+          1. Sign up free at https://formspree.io
+          2. Create a form, copy the endpoint (https://formspree.io/f/xxxxxxx)
+          3. Replace YOUR_FORM_ID below.
+          A good tip: set the Formspree form to deliver to smcbaauk@gmail.com
+          ===========================================================
+        -->
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="year-left">Year you left college (optional)</label>
+            <input type="text" id="year-left" name="year-left" placeholder="e.g. 2008" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell us a little about yourself, or how we can help."></textarea>
+          </div>
+          <button type="submit" class="btn btn--red">Send message</button>
+          <p class="form-note">We&rsquo;ll only use your details to respond and to keep you informed about branch activities.</p>
+        </form>
+      </div>
+
+      <aside class="info-card">
+        <h3>Contact details</h3>
+        <ul class="info-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+            <span>Phone &amp; WhatsApp<br><a href="tel:+447984183880">+44 7984 183880</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+            <span>Email<br><a href="mailto:smcbaauk@gmail.com">smcbaauk@gmail.com</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+            <span>Facebook<br><a href="https://www.facebook.com/SMCBAAUK" target="_blank" rel="noopener">@SMCBAAUK</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>St. Michael&rsquo;s College, Batticaloa<br><small>Alumni Association &mdash; United Kingdom</small></span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html">
+            <img src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
+            <span class="brand-text"><strong>St. Michael&rsquo;s College</strong><span>Batticaloa &middot; Alumni &middot; UK</span></span>
+          </a>
+          <p class="footer-blurb">The United Kingdom branch of the St. Michael&rsquo;s College, Batticaloa Alumni Association &mdash; keeping Michaelites connected across Britain. <em>Quis Ut Deus.</em></p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="committee.html">Committee</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="tel:+447984183880">+44 7984 183880</a></li>
+            <li><a href="mailto:smcbaauk@gmail.com">smcbaauk@gmail.com</a></li>
+            <li><a href="https://www.facebook.com/SMCBAAUK" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+          <div class="social" style="margin-top:1rem;">
+            <a href="https://www.facebook.com/SMCBAAUK" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> St. Michael&rsquo;s College Batticaloa Alumni Association &mdash; UK. All rights reserved.</span>
+        <span>Est. 1873 &middot; A College Second to None</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
