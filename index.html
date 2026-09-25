@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>St. Michael's College Batticaloa Alumni Association &mdash; UK</title>
-  <meta name="description" content="The UK branch of the St. Michael's College, Batticaloa Alumni Association — connecting Michaelites across Britain through reunions, cricket, networking and giving back." />
+  <title>St. Michael's College Batticaloa Alumni Association UK</title>
+  <meta name="description" content="The UK branch of the St. Michael's College, Batticaloa Alumni Association connecting Michaelites across Britain through reunions, cricket, networking and giving back." />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,42 +13,104 @@
 </head>
 <body>
 
+  <!-- ============================================================
+       LAUNCH CEREMONY OVERLAY (home page only)
+       Countdown 10 -> 1, then a ribbon + scissors. Clicking "Cut the
+       ribbon" splits it open and reveals the site. Shows once per
+       browser; add ?launch to the URL to replay it on the big screen.
+       Controlled by initLaunch() in assets/js/main.js.
+       ============================================================ -->
+  <div class="launch" id="launch" role="dialog" aria-label="Website launch ceremony" aria-live="polite">
+    <div class="launch-inner">
+      <img class="launch-crest" src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
+      <p class="launch-eyebrow">St. Michael&rsquo;s College Batticaloa &middot; Alumni Association UK</p>
+      <h1 class="launch-title">Launching our <em>new</em> website</h1>
+      <p class="launch-sub" id="launch-sub">The countdown to going live begins&hellip;</p>
+      <div class="count-wrap"><div class="count-num" id="count-num" aria-hidden="true">10</div></div>
+    </div>
+
+    <div class="ribbon-stage" id="ribbon-stage">
+      <div class="ribbon" id="ribbon">
+        <div class="ribbon-half left"></div>
+        <div class="ribbon-half right"></div>
+        <div class="ribbon-knot"><i></i></div>
+      </div>
+      <div class="cut-controls">
+        <p class="cut-hint">Ready when you are cut the ribbon to reveal the site.</p>
+        <button type="button" class="cut-btn" id="cut-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+          Cut the ribbon
+        </button>
+      </div>
+    </div>
+
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </div>
+
   <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="index.html" aria-label="St. Michael's College Alumni Association UK home">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="St. Michael’s College Alumni Association UK home">
         <img src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
         <span class="brand-text">
           <strong>St. Michael&rsquo;s College</strong>
-          <span>Batticaloa &middot; Alumni &middot; UK</span>
+          <span>Batticaloa Alumni Association UK</span>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+      <div class="header-info">
+        <div class="hi-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><strong>United Kingdom</strong><span>Michaelites branch</span></div></div>
+        <div class="hi-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><div><strong>+44 7984 183880</strong><span>Call us for enquiries</span></div></div>
+        <div class="hi-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><div><strong>Est. 1873</strong><span>Quis Ut Deus</span></div></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mainnav">
+    <div class="container mainnav-inner">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="ourstory.html">Our Story</a></li>
+        <li><a href="anthem.html">Anthem</a></li>
         <li><a href="committee.html">Committee</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
-  </header>
+  </nav>
 
   <!-- Hero -->
   <section class="hero">
     <div class="container hero-grid">
-      <div>
+      <div class="hero-copy">
         <span class="motto-chip reveal">&#9733; Quis Ut Deus &middot; Est. 1873</span>
         <h1 class="reveal d1">Once a Michaelite,<br><em>always</em> a Michaelite.</h1>
-        <p class="lead reveal d2">Welcome to the United Kingdom branch of the St. Michael&rsquo;s College, Batticaloa Alumni Association &mdash; bringing Old Boys together across Britain through reunions, sport, networking and a shared sense of home.</p>
+        <p class="hero-script reveal d2">A brotherhood for life</p>
+        <p class="lead reveal d2">Welcome to the United Kingdom branch of the St. Michael&rsquo;s College, Batticaloa Alumni Association bringing Old Boys together across Britain through reunions, sport, networking and a shared sense of home.</p>
         <div class="hero-actions reveal d3">
-          <a class="btn btn--red" href="contact.html">Join the branch</a>
+          <a class="btn btn--red" href="contact.html">Join the branch &rarr;</a>
           <a class="btn btn--ghost" href="committee.html">Meet the committee</a>
         </div>
       </div>
-      <div class="hero-crest reveal d2">
-        <img src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
-      </div>
+    </div>
+  </section>
+
+  <!-- Announcement bar -->
+  <div class="announce">
+    <div class="container">
+      <span class="announce-tag">Calling all Michaelites!</span>
+      Join the UK branch and stay connected with Old Boys near you.
+      <a href="contact.html">Become a member &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Sponsors promotional banner -->
+  <section class="section section--tight" style="padding-bottom:0;">
+    <div class="container">
+      <a class="promo-banner reveal" href="contact.html" aria-label="SMCBAA-UK Dinner Dance 2026 — Our Valued Sponsors">
+        <img src="assets/img/sponsors-banner.jpg" alt="SMCBAA-UK Dinner Dance 2026 — Our Valued Sponsors. Together for a Brighter Tomorrow." loading="lazy" />
+        <span class="promo-shine" aria-hidden="true"></span>
+      </a>
     </div>
   </section>
 
@@ -64,7 +126,7 @@
         <a class="btn btn--ghost" href="contact.html">Get in touch &rarr;</a>
       </div>
       <div class="figure-card">
-        <img src="assets/img/heritage.jpg" alt="St. Michael's College, Batticaloa — founded 1873, motto Quis Ut Deus" />
+        <img src="assets/img/heritage.jpg" alt="St. Michael's College, Batticaloa founded 1873, motto Quis Ut Deus" />
       </div>
     </div>
   </section>
@@ -86,7 +148,7 @@
         <article class="card reveal d1">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 9a6 6 0 0 0 12 0"/><path d="M9 22h6"/><path d="M12 15v7"/><path d="M4 5H2a4 4 0 0 0 4 4"/><path d="M20 5h2a4 4 0 0 1-4 4"/></svg></div>
           <h3>Cricket &amp; sport</h3>
-          <p>The traditions continue in Britain &mdash; from the Big Match to the Festival of Cricket and friendly fixtures.</p>
+          <p>The traditions continue in Britain from the Big Match to the Festival of Cricket and friendly fixtures.</p>
         </article>
         <article class="card reveal d2">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
@@ -102,25 +164,142 @@
     </div>
   </section>
 
+  <!-- Upcoming events -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What&rsquo;s on</p>
+        <hr class="rule" />
+        <h2>Upcoming gatherings</h2>
+        <p>Mark your calendar &ndash; here&rsquo;s where Michaelites are meeting next. Get in touch to be added to the list.</p>
+      </div>
+      <div class="events">
+        <article class="event-card reveal">
+          <div class="date-badge"><span class="m">Sep</span><span class="d">26</span></div>
+          <div class="event-body">
+            <h3>Annual Dinner &amp; Dance</h3>
+            <p>Our flagship evening of the year dinner, dancing, speeches and reconnecting with Old Boys from every era.</p>
+            <span class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>26 September 2026</span>
+          </div>
+        </article>
+        <article class="event-card reveal d1">
+          <div class="date-badge"><span class="m">Apr</span><span class="d">&rsquo;27</span></div>
+          <div class="event-body">
+            <h3>Branch AGM</h3>
+            <p>Members shape the year ahead review, elect the committee and plan the next chapter together.</p>
+            <span class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>April 2027</span>
+          </div>
+        </article>
+        <article class="event-card reveal d2">
+          <div class="date-badge"><span class="m">Jun</span><span class="d">19</span></div>
+          <div class="event-body">
+            <h3>Big Match</h3>
+            <p>The famous Michaelite Big Match tradition, played in Britain in the same spirit as back home.</p>
+            <span class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>19 June 2027</span>
+          </div>
+        </article>
+        <article class="event-card reveal d3">
+          <div class="date-badge"><span class="m">Jul</span><span class="d">14</span></div>
+          <div class="event-body">
+            <h3>Festival of Cricket</h3>
+            <p>The Michaelite cricketing tradition lives on in Britain with a friendly day of fixtures and family fun.</p>
+            <span class="event-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>14 July 2027</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="section section--tight band">
     <div class="container">
       <div class="stats">
-        <div class="stat"><div class="num">1873</div><div class="lbl">College founded</div></div>
-        <div class="stat"><div class="num">15</div><div class="lbl">Committee members</div></div>
+        <div class="stat"><div class="num" data-count="1873" data-plain>1873</div><div class="lbl">College founded</div></div>
+        <div class="stat"><div class="num" data-count="15">15</div><div class="lbl">Committee members</div></div>
         <div class="stat"><div class="num">UK</div><div class="lbl">Wide network</div></div>
         <div class="stat"><div class="num">&infin;</div><div class="lbl">Michaelite spirit</div></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- Latest project -->
+  <section class="section">
+    <div class="container split">
+      <div class="figure-card">
+        <img src="assets/img/gallery/projects-it-lab/full/itlab-02.jpg" alt="The completed IT Laboratory at St. Michael's College, Batticaloa, equipped by SMCBAA-UK" loading="lazy" />
+      </div>
+      <div>
+        <p class="eyebrow">Latest project</p>
+        <hr class="rule" />
+        <h2>A new IT Laboratory for our Alma Mater</h2>
+        <p>Through the generosity of our members, SMCBAA-UK has equipped St. Michael&rsquo;s College National School, Batticaloa, with a total of <strong>45 computers</strong>, a combined investment of around <strong>Rs. 12.20 million</strong>, giving students a modern space to build the digital skills they need for the future.</p>
+        <a class="btn btn--red" href="projects.html">Read more &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voices -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Voices</p>
+        <hr class="rule" />
+        <h2>What the branch means to us</h2>
+      </div>
+      <!-- Replace with real testimonials from members when available. -->
+      <div class="voices">
+        <figure class="quote-card reveal">
+          <span class="mark">&ldquo;</span>
+          <blockquote>Walking into that first reunion felt like coming home. Faces I hadn&rsquo;t seen in twenty years, and it was as if no time had passed at all.</blockquote>
+          <figcaption class="cite">A Michaelite in London<span>Old Boy</span></figcaption>
+        </figure>
+        <figure class="quote-card reveal d1">
+          <span class="mark">&ldquo;</span>
+          <blockquote>The branch gave my children a link to where I grew up and gave me a network of Old Boys I now count as close friends.</blockquote>
+          <figcaption class="cite">A Michaelite in the Midlands<span>Old Boy</span></figcaption>
+        </figure>
+        <figure class="quote-card reveal d2">
+          <span class="mark">&ldquo;</span>
+          <blockquote>From cricket on a summer afternoon to helping the college back home, being part of this is a privilege. Quis Ut Deus.</blockquote>
+          <figcaption class="cite">A Michaelite in the North<span>Old Boy</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery preview -->
+  <section class="section section--tight" style="padding-top:0;">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Memories</p>
+        <hr class="rule" />
+        <h2>Moments from the branch</h2>
+        <p>A glimpse of our reunions, cricket and gatherings across Britain.</p>
+      </div>
+      <div class="gallery-strip reveal">
+        <a href="gallery.html" aria-label="View the gallery"><img src="assets/img/gallery/dinner-dance-2025/thumb/DSC_1876.jpg" alt="Michaelites at the Annual Dinner Dance 2025" loading="lazy" /></a>
+        <a href="gallery.html" aria-label="View the gallery"><img src="assets/img/gallery/dinner-dance-2025/thumb/DSC_1932.jpg" alt="Michaelites at the Annual Dinner Dance 2025" loading="lazy" /></a>
+        <a href="gallery.html" aria-label="View the gallery"><img src="assets/img/gallery/dinner-dance-2025/thumb/DSC_2082.jpg" alt="Michaelites at the Annual Dinner Dance 2025" loading="lazy" /></a>
+        <a href="gallery.html" aria-label="View the gallery"><img src="assets/img/gallery/dinner-dance-2025/thumb/DSC_1994.jpg" alt="Michaelites at the Annual Dinner Dance 2025" loading="lazy" /></a>
+      </div>
+      <div style="text-align:center; margin-top:1.8rem;">
+        <a class="btn btn--ghost" href="gallery.html">See the full gallery &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / newsletter -->
   <section class="section">
     <div class="container cta">
       <p class="eyebrow">Reconnect</p>
       <h2>Are you a Michaelite living in the UK?</h2>
-      <p>We&rsquo;d love to welcome you. Register your details and we&rsquo;ll keep you posted on the next gathering near you.</p>
-      <a class="btn btn--solid" href="contact.html">Become a member</a>
+      <p>We&rsquo;d love to welcome you. Leave your email and we&rsquo;ll keep you posted on the next gathering near you or head to the contact page to tell us more.</p>
+      <!-- Wire this to Formspree (same as the contact form) before going live. -->
+      <form class="newsletter" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" aria-label="Email address" />
+        <button type="submit" class="btn btn--red">Keep me posted</button>
+      </form>
+      <p style="margin-top:1.4rem;"><a class="btn btn--ghost" href="contact.html">Become a member</a></p>
     </div>
   </section>
 
@@ -130,9 +309,9 @@
         <div>
           <a class="brand" href="index.html">
             <img src="assets/img/logo.png" alt="St. Michael's College Batticaloa Alumni Association UK crest" />
-            <span class="brand-text"><strong>St. Michael&rsquo;s College</strong><span>Batticaloa &middot; Alumni &middot; UK</span></span>
+            <span class="brand-text"><strong>St. Michael&rsquo;s College</strong><span>Batticaloa Alumni Association UK</span></span>
           </a>
-          <p class="footer-blurb">The United Kingdom branch of the St. Michael&rsquo;s College, Batticaloa Alumni Association &mdash; keeping Michaelites connected across Britain. <em>Quis Ut Deus.</em></p>
+          <p class="footer-blurb">The United Kingdom branch of the St. Michael&rsquo;s College, Batticaloa Alumni Association keeping Michaelites connected across Britain. <em>Quis Ut Deus.</em></p>
         </div>
         <div class="footer-col">
           <h4>Explore</h4>
@@ -147,7 +326,7 @@
           <h4>Connect</h4>
           <ul>
             <li><a href="tel:+447984183880">+44 7984 183880</a></li>
-            <li><a href="mailto:smcbaauk@gmail.com">smcbaauk@gmail.com</a></li>
+            <li><a href="mailto:smcbaa@org.uk">smcbaa@org.uk</a></li>
             <li><a href="https://www.facebook.com/SMCBAAUK" target="_blank" rel="noopener">Facebook</a></li>
           </ul>
           <div class="social" style="margin-top:1rem;">
@@ -158,7 +337,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="year">2026</span> St. Michael&rsquo;s College Batticaloa Alumni Association &mdash; UK. All rights reserved.</span>
+        <span>&copy; <span id="year">2026</span> St. Michael&rsquo;s College Batticaloa Alumni Association UK. All rights reserved.</span>
         <span>Est. 1873 &middot; A College Second to None</span>
       </div>
     </div>

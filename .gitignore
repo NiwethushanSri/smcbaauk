@@ -1,0 +1,8 @@
+# Full-resolution original photos — kept locally, never published.
+# Only the optimised versions under assets/img/gallery/**/{full,thumb} ship.
+_originals/
+
+# Node / tooling
+node_modules/
+.DS_Store
+Thumbs.db
