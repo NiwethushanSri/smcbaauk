@@ -92,103 +92,6 @@
   });
 })();
 
-/* ---- 3. Launch ceremony (ribbon cutting) ------------------------------ */
-(function () {
-  var launch = document.getElementById("launch");
-  if (!launch) return;
-
-  var force = /[?&]launch\b/i.test(location.search) || location.hash.toLowerCase() === "#launch";
-  // Show the ceremony once per browser; ?launch (or #launch) replays it.
-  var seen = false;
-  try { seen = localStorage.getItem("smcbaa_launched") === "1"; } catch (e) {}
-  if (seen && !force) { launch.parentNode.removeChild(launch); return; }
-
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var countEl = document.getElementById("count-num");
-  var subEl = document.getElementById("launch-sub");
-  var stage = document.getElementById("ribbon-stage");
-  var ribbon = document.getElementById("ribbon");
-  var cutBtn = document.getElementById("cut-btn");
-  var confetti = document.getElementById("confetti");
-  var colors = ["#cf1124", "#1e3fa0", "#ffd34d", "#ffffff", "#a60d1c"];
-
-  document.body.classList.add("launching");
-
-  function showNumber(txt, isGo) {
-    countEl.textContent = txt;
-    countEl.classList.toggle("go", !!isGo);
-    if (reduce) return;
-    countEl.classList.remove("count-pop");
-    void countEl.offsetWidth; // reflow to restart the animation
-    countEl.classList.add("count-pop");
-  }
-
-  function startRibbon() {
-    countEl.parentNode.style.display = "none";
-    subEl.textContent = "";
-    stage.classList.add("show");
-    if (!reduce) cutBtn.classList.add("pulse");
-  }
-
-  function burstConfetti() {
-    var pieces = reduce ? 40 : 140;
-    var frag = document.createDocumentFragment();
-    for (var i = 0; i < pieces; i++) {
-      var b = document.createElement("i");
-      var dur = 2.6 + Math.random() * 2.4;
-      b.style.left = Math.random() * 100 + "vw";
-      b.style.background = colors[(Math.random() * colors.length) | 0];
-      b.style.animationDuration = dur + "s";
-      b.style.animationDelay = Math.random() * 0.5 + "s";
-      var w = 7 + Math.random() * 8;
-      b.style.width = w + "px";
-      b.style.height = (w * (1 + Math.random())) + "px";
-      if (Math.random() > 0.6) b.style.borderRadius = "50%";
-      frag.appendChild(b);
-    }
-    confetti.appendChild(frag);
-    setTimeout(function () { confetti.innerHTML = ""; }, 6000);
-  }
-
-  function finish() {
-    launch.classList.add("done");
-    document.body.classList.remove("launching");
-    try { localStorage.setItem("smcbaa_launched", "1"); } catch (e) {}
-    setTimeout(function () { if (launch.parentNode) launch.parentNode.removeChild(launch); }, 1000);
-  }
-
-  var cut = false;
-  cutBtn.addEventListener("click", function () {
-    if (cut) return;
-    cut = true;
-    cutBtn.disabled = true;
-    cutBtn.classList.remove("pulse");
-    cutBtn.classList.add("snip");
-    var delay = reduce ? 0 : 400; // let the scissors snip first
-    setTimeout(function () {
-      ribbon.classList.add("cut");
-      burstConfetti();
-      var hint = document.querySelector(".cut-hint");
-      if (hint) hint.textContent = "Welcome to our new home. Once a Michaelite, always a Michaelite.";
-    }, delay);
-    setTimeout(finish, delay + (reduce ? 400 : 1500));
-  });
-
-  // Run the 10 -> 1 countdown, then reveal the ribbon.
-  var n = 10;
-  showNumber(String(n));
-  var timer = setInterval(function () {
-    n--;
-    if (n >= 1) {
-      showNumber(String(n));
-    } else {
-      clearInterval(timer);
-      showNumber("It's time!", true);
-      setTimeout(startRibbon, reduce ? 300 : 1100);
-    }
-  }, reduce ? 450 : 1000);
-})();
-
 /* ---- 4. Scroll-triggered reveals -------------------------------------- */
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -257,6 +160,173 @@
   window.addEventListener("scroll", function () {
     btn.classList.toggle("show", window.scrollY > 600);
   }, { passive: true });
+})();
+
+/* ---- Chat assistant --------------------------------------------------- */
+(function () {
+  var EMAIL = "smcbaauk@gmail.com";
+
+  // Knowledge base: keyword matchers -> answers sourced from the website.
+  var kb = [
+    { keys: ["join","member","membership","sign up","register","become"],
+      a: 'We&rsquo;d love to welcome you! You can register your details on our <a href="contact.html">Contact page</a>, or email us and we&rsquo;ll be in touch. Membership keeps you connected to Old Boys near you across the UK.' },
+    { keys: ["event","events","gathering","dinner","dance","agm","meeting","match","cricket","festival","upcoming","whats on","what's on"],
+      a: 'Our upcoming gatherings include the <strong>Annual Dinner &amp; Dance</strong>, <strong>Branch AGM</strong>, <strong>Big Match</strong> and the <strong>Festival of Cricket</strong>. Full dates will be published soon &ndash; see the <a href="index.html">home page</a> and get in touch to be added to the list.' },
+    { keys: ["project","projects","it","lab","computer","computers","laboratory","sponsor","sponsorship","donate","donation","support","insiv","giving","scholarship","bursary","university","abroad","overseas","education","study","studies","student","students"],
+      a: 'Our recent projects include a new <strong>IT Laboratory</strong> for the College (45 computers), our ongoing <strong>Student Sponsorship</strong> programme, and the <strong>INSIV Global Student Awareness Programme</strong> on overseas higher education. See them all on the <a href="projects.html">Projects page</a>. To support our work or ask about sponsorship, feel free to email us.' },
+    { keys: ["photo","photos","gallery","picture","pictures","album"],
+      a: 'You can browse photos from our events &ndash; Dinner Dance, Big Match, TSSA and more &ndash; on the <a href="gallery.html">Gallery page</a>.' },
+    { keys: ["anthem","song","college anthem"],
+      a: 'You can read and listen to our College Anthem on the <a href="anthem.html">Anthem page</a>.' },
+    { keys: ["story","history","founded","when","established","1989","our story","about","who"],
+      a: 'SMCBAA UK was founded in 1989. You can read our full history and milestones on the <a href="ourstory.html">Our Story page</a>.' },
+    { keys: ["committee","president","leadership","who runs"],
+      a: 'You can meet the current Executive Committee on the <a href="committee.html">Committee page</a>.' },
+    { keys: ["contact","phone","call","number","email","reach","facebook","whatsapp"],
+      a: 'You can reach us by phone/WhatsApp on <a href="tel:+447984183880">+44 7984 183880</a>, by email at <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>, or on <a href="https://www.facebook.com/SMCBAAUK" target="_blank" rel="noopener">Facebook</a>. More on the <a href="contact.html">Contact page</a>.' },
+    { keys: ["hi","hello","hey","hiya","good morning","good afternoon","good evening"],
+      a: 'Hello! &#128075; I&rsquo;m the SMCBAA UK assistant. Ask me about events, membership, our projects, the gallery or how to get in touch &ndash; or I can help you email the committee.' },
+    { keys: ["thanks","thank you","cheers","ok","okay"],
+      a: 'You&rsquo;re welcome! Is there anything else I can help you with? <em>Quis Ut Deus.</em>' }
+  ];
+
+  function emailBtn(q) {
+    var subject = encodeURIComponent("Enquiry from the SMCBAA UK website");
+    var body = encodeURIComponent((q ? "My question: " + q + "\n\n" : "") + "My message:\n");
+    return '<br><a href="mailto:' + EMAIL + '?subject=' + subject + '&body=' + body + '">&#9993;&#65039; Email the committee</a>';
+  }
+
+  function answer(text) {
+    var t = text.toLowerCase();
+    var words = t.replace(/[^a-z0-9\s]/g, " ").split(/\s+/);
+    function has(key) {
+      return key.indexOf(" ") !== -1 ? t.indexOf(key) !== -1 : words.indexOf(key) !== -1;
+    }
+    for (var i = 0; i < kb.length; i++) {
+      for (var k = 0; k < kb[i].keys.length; k++) {
+        if (has(kb[i].keys[k])) return kb[i].a;
+      }
+    }
+    return "I&rsquo;m not sure about that one &ndash; but our committee would be glad to help. You can email us your question and we&rsquo;ll get back to you." + emailBtn(text);
+  }
+
+  // Build the widget
+  var launch = document.createElement("button");
+  launch.className = "chat-launch";
+  launch.setAttribute("aria-label", "Open chat assistant");
+  launch.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Chat with us';
+
+  var panel = document.createElement("div");
+  panel.className = "chat-panel";
+  panel.setAttribute("role", "dialog");
+  panel.setAttribute("aria-label", "SMCBAA UK chat assistant");
+  panel.innerHTML =
+    '<div class="chat-head">' +
+      '<img src="assets/img/logo.png" alt="SMCBAA UK crest" />' +
+      '<div class="ct"><strong>SMCBAA UK Assistant</strong><span>Here to help &middot; replies instantly</span></div>' +
+      '<button class="chat-close" aria-label="Close chat">&times;</button>' +
+    '</div>' +
+    '<div class="chat-body" id="chat-body"></div>' +
+    '<div class="chat-quick" id="chat-quick"></div>' +
+    '<form class="chat-foot" id="chat-form">' +
+      '<input type="text" id="chat-input" placeholder="Type your question&hellip;" autocomplete="off" aria-label="Your message" />' +
+      '<button class="chat-send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>' +
+    '</form>';
+
+  document.body.appendChild(launch);
+  document.body.appendChild(panel);
+
+  var body = panel.querySelector("#chat-body");
+  var quick = panel.querySelector("#chat-quick");
+  var form = panel.querySelector("#chat-form");
+  var input = panel.querySelector("#chat-input");
+
+  function add(html, who) {
+    var m = document.createElement("div");
+    m.className = "chat-msg " + who;
+    m.innerHTML = html;
+    body.appendChild(m);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  var chips = [
+    ["Upcoming events", "events"],
+    ["How to join", "join membership"],
+    ["Our projects", "projects"],
+    ["Gallery", "gallery photos"],
+    ["Contact us", "contact"]
+  ];
+  var started = false;
+  function start() {
+    if (started) return; started = true;
+    add("Hello! &#128075; I&rsquo;m the SMCBAA UK assistant. Ask me about events, membership, our projects or how to get in touch &ndash; or I can help you email the committee.", "bot");
+    chips.forEach(function (c) {
+      var b = document.createElement("button");
+      b.className = "chat-chip"; b.type = "button"; b.textContent = c[0];
+      b.addEventListener("click", function () { handle(c[0], c[1]); });
+      quick.appendChild(b);
+    });
+  }
+
+  function handle(display, query) {
+    add(display, "user");
+    setTimeout(function () { add(answer(query || display), "bot"); }, 300);
+  }
+
+  function open() { panel.classList.add("open"); launch.classList.add("hidden"); start(); setTimeout(function(){ input.focus(); }, 100); }
+  function close() { panel.classList.remove("open"); launch.classList.remove("hidden"); }
+
+  launch.addEventListener("click", open);
+  panel.querySelector(".chat-close").addEventListener("click", close);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = input.value.trim();
+    if (!v) return;
+    input.value = "";
+    handle(v);
+  });
+})();
+
+/* ---- Mini calendar ---------------------------------------------------- */
+(function () {
+  var el = document.getElementById("mini-cal");
+  if (!el) return;
+  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var dow = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  var today = new Date();
+  var view = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  function render() {
+    var y = view.getFullYear(), m = view.getMonth();
+    var firstDay = (new Date(y, m, 1).getDay() + 6) % 7; // Monday-start offset
+    var daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    var html = '<div class="cal-head">' +
+      '<button class="cal-nav" type="button" data-dir="-1" aria-label="Previous month">&#8249;</button>' +
+      '<span>' + months[m] + ' ' + y + '</span>' +
+      '<button class="cal-nav" type="button" data-dir="1" aria-label="Next month">&#8250;</button>' +
+      '</div><div class="cal-grid">';
+
+    for (var d = 0; d < 7; d++) html += '<div class="cal-dow">' + dow[d] + '</div>';
+    for (var i = 0; i < firstDay; i++) html += '<div class="cal-day empty"></div>';
+    for (var day = 1; day <= daysInMonth; day++) {
+      var wd = (firstDay + day - 1) % 7;
+      var cls = "cal-day" + (wd >= 5 ? " weekend" : "");
+      if (y === today.getFullYear() && m === today.getMonth() && day === today.getDate()) cls += " today";
+      html += '<div class="' + cls + '">' + day + '</div>';
+    }
+    html += '</div>';
+    el.innerHTML = html;
+
+    var navs = el.querySelectorAll(".cal-nav");
+    for (var n = 0; n < navs.length; n++) {
+      navs[n].addEventListener("click", function () {
+        view.setMonth(view.getMonth() + parseInt(this.getAttribute("data-dir"), 10));
+        render();
+      });
+    }
+  }
+  render();
 })();
 
 /* ---- Footer year ------------------------------------------------------ */
